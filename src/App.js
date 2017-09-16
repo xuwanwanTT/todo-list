@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodoInput from './TodoInput'       //将输入框变成一个组件
+import TodoInput from './TodoInput'       //将输入框封装成TodoInput组件
+import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组件
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
@@ -8,14 +9,19 @@ class App extends Component {
     this.state = {                    
       newTodo: 'test',                //newTodo变量存储输入框中的内容
       todoList: [                   
-        {id:1,title:'第一个待办'}     //todoList变量存储输入的所有todo
+        {id:1,title:'第一个待办'},     //todoList变量存储输入的所有todo
+        {id:2,title:'第二个待办'}
       ]
     }
   } 
   render() {                        //渲染
 
     let todos = this.state.todoList.map((item,index)=>{
-      return <li>{item.title}</li>
+      return (
+        <li>
+          <TodoItem todo={item} />
+        </li>
+      )
     })
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
