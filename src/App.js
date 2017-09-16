@@ -15,14 +15,17 @@ class App extends Component {
   } 
   render() {                        //渲染
 
-    let todos = this.state.todoList.map((item,index)=>{
-      return (
-        <li key={index}>
-          <TodoItem todo={item} onToggle={this.toggle.bind(this)}
-            onDelete={this.delete.bind(this)} />
-        </li>
-      )
-    })
+    let todos = this.state.todoList
+      .filter((item)=>!item.deleted)
+      .map((item,index)=>{
+        console.log(1)
+        return (
+          <li key={index}>
+            <TodoItem todo={item} onToggle={this.toggle.bind(this)}
+              onDelete={this.delete.bind(this)} />
+          </li>
+        )
+      })
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
