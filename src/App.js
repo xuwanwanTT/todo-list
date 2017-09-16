@@ -30,6 +30,7 @@ class App extends Component {
         <h1>我的待办</h1>
         <div className="inputWrapper">  
           <TodoInput content={this.state.newTodo}
+            onChange={this.changeTitle.bind(this)}
             onSubmit={this.addTodo.bind(this)} />
         </div>
         <ol>
@@ -37,6 +38,12 @@ class App extends Component {
         </ol>
       </div>
     )
+  }
+  changeTitle(event){
+    this.setState({
+      newTodo: event.target.value,
+      todoList: this.state.todoList
+    })
   }
   addTodo(event){
     this.state.todoList.push({

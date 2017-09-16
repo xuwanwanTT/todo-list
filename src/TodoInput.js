@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class TodoInput extends Component {
   render(){
-    return <input type="text" defaultValue={this.props.content}
+    return <input type="text" value={this.props.content}
+      onChange={this.changeTitle.bind(this)}
       onKeyPress={this.submit.bind(this)} />
       //这里在执行事件时，是按照submit.call()方法调用函数
       //此时的submit函数的this不是指向"this.props"中的this
@@ -12,5 +13,8 @@ export default class TodoInput extends Component {
     if(e.key === 'Enter'){
       this.props.onSubmit(e)
     }
+  }
+  changeTitle(e){
+    this.props.onChange(e)
   }
 }
