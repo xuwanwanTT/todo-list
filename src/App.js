@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import TodoInput from './TodoInput'       //将输入框变成一个组件
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
@@ -16,11 +17,12 @@ class App extends Component {
     let todos = this.state.todoList.map((item,index)=>{
       return <li>{item.title}</li>
     })
+    
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
         <h1>我的待办</h1>
-        <div className="inputWrapper">
-          <input type="text" value={this.state.newTodo} />
+        <div className="inputWrapper">  
+          <TodoInput content={this.state.newTodo} />
         </div>
         <ol>
           {todos}
