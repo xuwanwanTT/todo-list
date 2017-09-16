@@ -18,12 +18,10 @@ class App extends Component {
     let todos = this.state.todoList.map((item,index)=>{
       return (
         <li key={index}>
-          <TodoItem todo={item} />
+          <TodoItem todo={item} onToggle={this.toggle.bind(this)} />
         </li>
       )
     })
-
-    console.log(todos)
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
@@ -39,6 +37,12 @@ class App extends Component {
       </div>
     )
   }
+
+  toggle(e,todo){
+    todo.status = todo.status === 'completed' ? '' : 'completed'
+    this.setState(this.state)
+  }
+
   changeTitle(event){
     this.setState({
       newTodo: event.target.value,
