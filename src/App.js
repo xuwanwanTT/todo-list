@@ -19,10 +19,10 @@ class App extends Component {
     let todos = this.state.todoList
       .filter((item)=>!item.deleted)
       .map((item,index)=>{
-        console.log(1)
         return (
           <li key={index}>
-            <TodoItem todo={item} onToggle={this.toggle.bind(this)}
+            <TodoItem todo={item}
+              onToggle={this.toggle.bind(this)}
               onDelete={this.delete.bind(this)} />
           </li>
         )
@@ -43,10 +43,14 @@ class App extends Component {
     )
   }
 
-  toggle(e,todo){
-    todo.status = todo.status === 'completed' ? '' : 'completed'
-    this.setState(this.state)
+  componentDidUpdate(){
     localStore.save('todoList',this.state.todoList)
+  }   //理解“组件更新 == 数据更新” componentDidUpdate会在组件更新后调用
+
+  toggle(e,todo){
+    todo.status = ((todo.status === 'completed') ? ('') : ('completed'))  
+    //这里的括号只是提示运算顺序，可以去除，语法(条件)?(结果1):(结果2)，如果条件满足，返回结果1，否则结果2
+    this.setState(this.state)
   }
 
   changeTitle(event){
@@ -54,7 +58,6 @@ class App extends Component {
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
-    localStore.save('todoList',this.state.todoList)
   }
   addTodo(event){
     this.state.todoList.push({
@@ -67,12 +70,10 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
-    localStore.save('todoList',this.state.todoList)
   }
   delete(event,todo){
     todo.deleted = true
     this.setState(this.state)
-    localStore.save('todoList',this.state.todoList)
   }
 }
 
