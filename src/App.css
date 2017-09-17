@@ -10,10 +10,19 @@
   box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
 }
 
-App > .todoList > li:nth-child(odd) {
-  background: #eee;
+.App > .todoList {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  box-shadow: 5px 17px 20px -13px grey, 0px 10px 20px -5px grey;
+  min-height: 65vh;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-App > .todoList > li:nth-child(even) {
-  background: transparent;
+.App > .todoList > li:nth-child(odd) > .TodoItem {
+  border-bottom: 1px solid red;
+}
+
+.App > .todoList > li:nth-child(even) > .TodoItem {
+  border-bottom: 1px solid green;
 }
