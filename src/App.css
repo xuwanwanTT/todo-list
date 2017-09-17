@@ -19,6 +19,10 @@
   margin-bottom: 30px;
 }
 
+.App > .todoList > li {
+  margin: 10px 20px 20px 20px;
+}
+
 .App > .todoList > li:nth-child(odd) > .TodoItem {
   border-bottom: 1px solid red;
 }
