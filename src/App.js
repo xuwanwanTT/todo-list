@@ -11,11 +11,7 @@ class App extends Component {
     super(props)                       //super(),相当于引入this
     this.state = {                    
       newTodo: '',                //newTodo变量存储输入框中的内容
-      todoList: localStore.load('todoList') || [
-        {id:1,title:"吃饭"},
-        {id:2,title:"睡觉"},
-        {id:3,title:"学前端"}
-      ]   //todoList变量存储输入的所有todo
+      todoList: localStore.load('todoList') || []   //todoList变量存储输入的所有todo
     }
   } 
   render() {                        //渲染
