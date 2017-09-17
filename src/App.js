@@ -4,13 +4,14 @@ import TodoInput from './TodoInput'       //将输入框封装成TodoInput组件
 import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组件
 import 'normalize.css'                    //CSS reset的替代方案
 import './reset.css'                        //手动reset
+import * as localStore from './localStore'    //封装localStorage
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
     super(props)                       //super(),相当于引入this
     this.state = {                    
       newTodo: '',                //newTodo变量存储输入框中的内容
-      todoList: []               //todoList变量存储输入的所有todo
+      todoList: localStore.load('todoList') || []   //todoList变量存储输入的所有todo
     }
   } 
   render() {                        //渲染
@@ -45,6 +46,7 @@ class App extends Component {
   toggle(e,todo){
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
+    localStore.save('todoList',this.state.todoList)
   }
 
   changeTitle(event){
@@ -52,6 +54,7 @@ class App extends Component {
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
+    localStore.save('todoList',this.state.todoList)
   }
   addTodo(event){
     this.state.todoList.push({
@@ -64,10 +67,12 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
+    localStore.save('todoList',this.state.todoList)
   }
   delete(event,todo){
     todo.deleted = true
     this.setState(this.state)
+    localStore.save('todoList',this.state.todoList)
   }
 }
 
