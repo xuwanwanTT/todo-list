@@ -3,14 +3,15 @@ import './App.css';
 import TodoInput from './TodoInput'       //将输入框封装成TodoInput组件
 import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组件
 import 'normalize.css'                    //CSS reset的替代方案
-import './reset.css'                        //手动reset
+import './reset.css'                      //手动reset
 import UserDialog from './UserDialog'
+import { getCurrentUser } from './leanCloud' //leanCloud的API，获取登录用户名
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
     super(props)                       //super(),相当于引入this
     this.state = {
-      user: {},                    
+      user: getCurrentUser() || {},                    
       newTodo: '',                //newTodo变量存储输入框中的内容
       todoList: []   //todoList变量存储输入的所有todo
     }
