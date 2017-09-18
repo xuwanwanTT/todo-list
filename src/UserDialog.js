@@ -20,17 +20,13 @@ export default class UserDialog extends Component {
   }
 
   signUp(e){}
+
   signIn(e){}
-  changeUsername(e){
+
+  changeFormData(key,e){
     //深拷贝,不能直接修改state,要用setState
     let stateCopy = JSON.parse(JSON.stringify(this.state))
-    stateCopy.formData.username = e.target.value
-    this.setState(stateCopy)
-  }
-
-  changePassword(e){
-    let stateCopy = JSON.parse(JSON.stringify(this.state))
-    stateCopy.formData.password = e.target.value
+    stateCopy.formData[key] = e.target.value
     this.setState(stateCopy)
   }
 
@@ -40,12 +36,12 @@ export default class UserDialog extends Component {
         <div className="row">
           <label>用户名</label>
           <input type="text" value={this.state.formData.username}
-            onChange={this.changeUsername.bind(this)} />
+            onChange={this.changeFormData.bind(this,'username')} />
         </div>
         <div className="row">
           <label>密码</label>
           <input type="password" value={this.state.formData.password}
-            onChange={this.changePassword.bind(this)} />
+            onChange={this.changeFormData.bind(this,'password')} />
         </div>
         <div className="row action">
           <button type="submit">注册</button>
@@ -58,12 +54,12 @@ export default class UserDialog extends Component {
         <div className="row">
           <label>用户名</label>
           <input type="text" value={this.state.formData.username}
-            onChange={this.changeUsername.bind(this)} />
+            onChange={this.changeFormData.bind(this,'username')} />
         </div>
         <div className="row">
           <label>密码</label>
           <input type="password" value={this.state.formData.password}
-            onChange={this.changePassword.bind(this)} />
+            onChange={this.changeFormData.bind(this,'password')} />
         </div>
         <div className="row action">
           <button type="submit">登录</button>
