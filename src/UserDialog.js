@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './UserDialog.css'
+import { signUp } from './leanCloud'
 
 export default class UserDialog extends Component {
   constructor(props){
@@ -8,6 +9,7 @@ export default class UserDialog extends Component {
       selected: 'signUp',
       formData: {
         username: '',
+        email: '',
         password: '',
       }
     }
@@ -19,7 +21,17 @@ export default class UserDialog extends Component {
     })
   }
 
-  signUp(e){}
+  signUp(e){
+    e.preventDefault()
+    let { username, email, password } = this.state.formData
+    let success = (user)=>{
+      console.log(user)
+    }
+    let error = (error)=>{
+      console.log(error)
+    }
+    signUp(username, email, password, success, error)
+  }
 
   signIn(e){}
 
@@ -35,12 +47,17 @@ export default class UserDialog extends Component {
       <form className="signUp" onSubmit={this.signUp.bind(this)}> {/*注册*/}
         <div className="row">
           <label>用户名</label>
-          <input type="text" value={this.state.formData.username}
+          <input type="text" value={this.state.formData.username} placeholder="your name"
             onChange={this.changeFormData.bind(this,'username')} />
         </div>
         <div className="row">
+          <label>邮箱</label>
+          <input type="email" value={this.state.formData.email} placeholder="Re. name@email.com"
+            onChange={this.changeFormData.bind(this,'email')} />
+        </div>
+        <div className="row">
           <label>密码</label>
-          <input type="password" value={this.state.formData.password}
+          <input type="password" value={this.state.formData.password} placeholder="password"
             onChange={this.changeFormData.bind(this,'password')} />
         </div>
         <div className="row action">
@@ -53,12 +70,12 @@ export default class UserDialog extends Component {
       <form className="signIn" onSubmit={this.signIn.bind(this)}> {/*登录*/}
         <div className="row">
           <label>用户名</label>
-          <input type="text" value={this.state.formData.username}
+          <input type="text" value={this.state.formData.username} placeholder="your name"
             onChange={this.changeFormData.bind(this,'username')} />
         </div>
         <div className="row">
           <label>密码</label>
-          <input type="password" value={this.state.formData.password}
+          <input type="password" value={this.state.formData.password} placeholder="password"
             onChange={this.changeFormData.bind(this,'password')} />
         </div>
         <div className="row action">
