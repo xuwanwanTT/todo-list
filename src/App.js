@@ -9,7 +9,8 @@ import UserDialog from './UserDialog'
 class App extends Component {
   constructor(props){                   //设置state的初始值
     super(props)                       //super(),相当于引入this
-    this.state = {                    
+    this.state = {
+      user: {},                    
       newTodo: '',                //newTodo变量存储输入框中的内容
       todoList: []   //todoList变量存储输入的所有todo
     }
@@ -30,7 +31,7 @@ class App extends Component {
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
-        <h1>我的待办</h1>
+        <h1>{this.state.user.username || "我"}的待办</h1>
         <div className="inputWrapper">  
           <TodoInput content={this.state.newTodo}
             onChange={this.changeTitle.bind(this)}
@@ -39,9 +40,14 @@ class App extends Component {
         <ol className="todoList">
           {todos}
         </ol>
-        <UserDialog />
+        <UserDialog onSignUp={this.onSignUp.bind(this)} />
       </div>
     )
+  }
+
+  onSignUp(user){
+    this.state.user = user
+    this.setState(this.state)
   }
 
   componentDidUpdate(){
