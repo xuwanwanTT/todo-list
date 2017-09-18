@@ -5,7 +5,7 @@ import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组�
 import 'normalize.css'                    //CSS reset的替代方案
 import './reset.css'                      //手动reset
 import UserDialog from './UserDialog'
-import { getCurrentUser } from './leanCloud' //leanCloud的API，获取登录用户名
+import { getCurrentUser, signOut } from './leanCloud' //leanCloud的API，获取登录用户名
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
@@ -32,7 +32,9 @@ class App extends Component {
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
-        <h1>{this.state.user.username || "我"}的待办</h1>
+        <h1>{this.state.user.username || "我"}的待办
+          {this.state.user.id ? <button onClick={this.signOut.bind(this)}>登出</button> : null}
+        </h1>
         <div className="inputWrapper">  
           <TodoInput content={this.state.newTodo}
             onChange={this.changeTitle.bind(this)}
@@ -41,12 +43,29 @@ class App extends Component {
         <ol className="todoList">
           {todos}
         </ol>
-        {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUp.bind(this)} />}
+        {this.state.user.id ?
+          null :
+          <UserDialog
+            onSignUp={this.onSignUp.bind(this)}
+            onSignIn={this.onSignIn.bind(this)} />}
       </div>
     )
   }
 
+  signOut(){
+    signOut()
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy = {}
+    this.setState(stateCopy)
+  }
+
   onSignUp(user){
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.user = user
+    this.setState(stateCopy)
+  }
+
+  onSignIn(user){
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy)

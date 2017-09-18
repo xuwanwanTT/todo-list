@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './UserDialog.css'
-import { signUp } from './leanCloud'
+import { signUp, signIn } from './leanCloud'
 
 export default class UserDialog extends Component {
   constructor(props){
@@ -28,12 +28,22 @@ export default class UserDialog extends Component {
       this.props.onSignUp.call(null,user)
     }
     let error = (error)=>{
-      console.log(error)
+      alert(error)
     }
     signUp(username, email, password, success, error)
   }
 
-  signIn(e){}
+  signIn(e){
+    e.preventDefault()
+    let { username, email, password } = this.state.formData
+    let success = (user)=>{
+      this.props.onSignIn.call(null,user)
+    }
+    let error = (error)=>{
+      alert(error)
+    }
+    signIn(username, email, password, success, error)
+  }
 
   changeFormData(key,e){
     //深拷贝,不能直接修改state,要用setState
@@ -70,7 +80,7 @@ export default class UserDialog extends Component {
       <form className="signIn" onSubmit={this.signIn.bind(this)}> {/*登录*/}
         <div className="row">
           <label>用户名</label>
-          <input type="text" value={this.state.formData.username} placeholder="your name"
+          <input type="text" value={this.state.formData.username} placeholder="your name or email"
             onChange={this.changeFormData.bind(this,'username')} />
         </div>
         <div className="row">
