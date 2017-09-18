@@ -28,7 +28,11 @@ export default class UserDialog extends Component {
       this.props.onSignUp.call(null,user)
     }
     let error = (error)=>{
-      alert(error)
+      if(error.code === 202){
+        alert('用户名已存在')
+      }else if(error.code === 203){
+        alert('邮箱已存在')
+      }
     }
     signUp(username, email, password, success, error)
   }
@@ -40,7 +44,11 @@ export default class UserDialog extends Component {
       this.props.onSignIn.call(null,user)
     }
     let error = (error)=>{
-      alert(error)
+      if(error.code === 210){
+        alert('用户名或密码错误')
+      }else if(error.code === 211){
+        alert('用户名不存在')
+      }
     }
     signIn(username, email, password, success, error)
   }
