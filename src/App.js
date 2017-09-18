@@ -4,6 +4,7 @@ import TodoInput from './TodoInput'       //将输入框封装成TodoInput组件
 import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组件
 import 'normalize.css'                    //CSS reset的替代方案
 import './reset.css'                        //手动reset
+import UserDialog from './UserDialog'
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
@@ -38,6 +39,7 @@ class App extends Component {
         <ol className="todoList">
           {todos}
         </ol>
+        <UserDialog />
       </div>
     )
   }
