@@ -5,24 +5,6 @@ import TodoItem from './TodoItem'         //将每条待办封装成TodoItem组�
 import 'normalize.css'                    //CSS reset的替代方案
 import './reset.css'                        //手动reset
 import * as localStore from './localStore'    //封装localStorage
-import AV from 'leancloud-storage'          
-
-var APP_ID = 'pen2LxGH3TmOc876lQRG6Jum-gzGzoHsz';
-var APP_KEY = 'l1541niyTjE9siUDCVw5mTaf';
-
-AV.init({
-  appId: APP_ID,
-  appKey: APP_KEY
-});
-
-var TestObject = AV.Object.extend('TestObject')
-var testObject = new TestObject()
-testObject.save({
-  words: 'Hello Wold!'
-}).then(function(object){
-  alert('leanCloud Rocks!')
-})
-
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
