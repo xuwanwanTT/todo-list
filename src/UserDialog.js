@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import './UserDialog.css'
-import { signUp, signIn } from './leanCloud'
+import { signUp, signIn, sendPasswordResetEmail } from './leanCloud'
 
 export default class UserDialog extends Component {
   constructor(props){
     super(props)
     this.state = {
       selected: 'signUp',
+      selectedTab: 'signInOrSignUp',
       formData: {
         username: '',
         email: '',
@@ -98,28 +99,72 @@ export default class UserDialog extends Component {
         </div>
         <div className="row action">
           <button type="submit">登录</button>
+          <p onClick={this.showForgotPassword.bind(this)}>忘记密码了？</p>
         </div>
       </form>      
+    )
+    let signInOrSignUp = (
+      <div className="signInOrSignUp">
+        <nav>
+          <label>
+            <input type="radio" value="signUp"
+              checked={this.state.selected === 'signUp'}
+              onChange={this.switch.bind(this)}
+            /> 注册 </label>
+          <label>
+            <input type="radio" value="signIn"
+              checked={this.state.selected === 'signIn'}
+              onChange={this.switch.bind(this)}
+            /> 登录 </label>
+        </nav>
+        <div className="panes">
+          {this.state.selected === 'signUp' ? signUpForm : null}
+          {this.state.selected === 'signIn' ? signInForm : null}
+        </div>
+      </div>
+    )
+
+    let forgotPassword = (
+      <div className="forgotPassword">
+        <h3>
+          重置密码
+        </h3>
+        <form className="forgotPassword" onSubmit={this.resetPassword.bind(this)}> {/* 登录 */}
+          <div className="row">
+            <label>邮箱</label>
+            <input type="email" value={this.state.formData.email}
+              onChange={this.changeFormData.bind(this,'email')}
+            />
+          </div>
+          <div>
+            <button type="submit">发送重置邮件</button>
+            <p onClick={this.returnToSignIn.bind(this)}>返回登录</p>
+          </div>
+        </form>
+      </div>
     )
     return (
       <div className="UserDialog-Wrapper">
         <div className="UserDialog">
-          <nav onChange={this.switch.bind(this)}>
-            <label>
-              <input type="radio" value="signUp"
-                checked={this.state.selected === 'signUp'}
-                onChange={this.switch.bind(this)} />注册</label>
-            <label>
-              <input type="radio" value="signIn"
-                checked={this.state.selected === 'signIn'}
-                onChange={this.switch.bind(this)} />登录</label>
-          </nav>
-          <div className="panes">
-            {this.state.selected === 'signUp' ? signUpForm : null}
-            {this.state.selected === 'signIn' ? signInForm : null}
-          </div>
+          {this.state.selectedTab === 'signInOrSignUp' ? signInOrSignUp : forgotPassword}
         </div>
       </div>
     )
+  }
+  showForgotPassword(){
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.selectedTab = 'forgotPassword'
+    this.setState(stateCopy)
+  }
+
+  returnToSignIn(){
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.selectedTab = 'signInOrSignUp'
+    this.setState(stateCopy)
+  }
+
+  resetPassword(e){
+    e.preventDefault()
+    sendPasswordResetEmail(this.state.formData.email)
   }
 }
