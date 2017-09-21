@@ -6,6 +6,18 @@ import 'normalize.css'                    //CSS reset的替代方案
 import './reset.css'                      //手动reset
 import UserDialog from './UserDialog'
 import { getCurrentUser, signOut } from './leanCloud' //leanCloud的API，获取登录用户名
+import AV from './leanCloud'
+
+var TodoFolder = AV.Object.extend('TodoFolder') //声明类型
+var todoFolder = new TodoFolder() //创建对象
+todoFolder.set('name','工作') //设置名称
+todoFolder.set('priority',1)  //设置优先级
+todoFolder.save().then(function(todo){
+  console.log('objectId is ' + todo.id)
+},function(error){
+  console.log(error)
+})
+
 
 class App extends Component {
   constructor(props){                   //设置state的初始值
