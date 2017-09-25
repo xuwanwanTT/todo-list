@@ -9,14 +9,13 @@ export default class ForgotPasswordForm extends Component {
         </h3>
         <form className="forgotPassword" onSubmit={this.props.onSubmit}> {/* 登录 */}
           <div className="row">
-            <label>邮箱</label>
-            <input type="email" value={this.props.formData.email}
+            <input type="email" value={this.props.formData.email} placeholder="你的邮箱"
               onChange={this.props.onChange.bind(null,'email')}
             />
           </div>
-          <div>
+          <div className="row action">
             <button type="submit">发送重置邮件</button>
-            <p onClick={this.props.onSignIn}>返回登录</p>
+            <p className="btnRe" onClick={this.props.onSignIn}>返回登录</p>
           </div>
         </form>
       </div>

@@ -18,14 +18,23 @@
   box-shadow: 0 0 1em hsla(0, 0%, 0%, 0.35);
 }
 
-.UserDialog .signInOrSignUp > nav:first-child {
-  padding: 1em;
-  margin-left: -2em;
+.UserDialog .signInOrSignUp > nav {
+  display: flex;
+  justify-content: space-between;
 }
 
-.UserDialog .signInOrSignUp > nav:first-child label {
-  margin-left: 2em;
+.UserDialog .signInOrSignUp > nav > label {
+  display: block;
+  padding: 1em;
+  flex: 1;
+  text-align: center;
   cursor: pointer;
+  /* background: #eee; */
+  border-right: 2px solid #eee;
+}
+
+.UserDialog .signInOrSignUp > nav > label > input {
+  display: none;
 }
 
 .UserDialog .signInOrSignUp > .panes {
@@ -41,18 +50,21 @@
 }
 
 .UserDialog form > .row {
-  display: flex;
   padding: .3em 0;
+  width: 20em;
 }
 
-.UserDialog form > .row > label:first-child {
-  width: 4em;
+.UserDialog form > .row > input {
+  width: 18em;
+  height: 3em;
+  border: 1px solid rgba(0,0,0,.2);
+  padding-left: 1em;
+  outline: none;
+  
 }
 
 .UserDialog form > .row.actions {
   padding-left: 4em;
-  display: flex;
-  align-items: center;
 }
 
 .UserDialog form > .row.actions button {
@@ -62,4 +74,67 @@
 .UserDialog button {
   font: inherit;
   padding: .2em;
+  border: 0 solid;
+  width: 60px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.UserDialog button:hover {
+  background: grey;
+  color: white;
+}
+
+.forgotPassword button {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.UserDialog .btnFgt {
+  cursor: pointer;
+}
+
+.forgotPassword .row {
+  margin-bottom: 1em;
+}
+
+.UserDialog form > .row.action p {
+  width: 100px;
+  cursor: pointer;
+  color: blue;
+}
+
+.UserDialog form > .row.action p:hover {
+  color: grey;
+}
+
+form.signUp,
+form.signIn {
+  position: relative;
+}
+
+form.signUp::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  background: #eee;
+  top: -10px;
+  left: 40px;
+  border-radius: 4px;
+}
+
+form.signIn::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  background: #eee;
+  top: -10px;
+  right: 44px;
+  border-radius: 4px;
 }

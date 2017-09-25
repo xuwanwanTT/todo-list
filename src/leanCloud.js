@@ -42,7 +42,7 @@ export const TodoModel = {
       errorFn && errorFn.call(null,error)
     })
   },
-  update(id, title, status, deleted, successFn, errorFn){
+  update({id, title, status, deleted}, successFn, errorFn){
     let todo = AV.Object.createWithoutData('Todo',id)
     title !== undefined && todo.set('title',title)
     status !== undefined && todo.set('status',status)

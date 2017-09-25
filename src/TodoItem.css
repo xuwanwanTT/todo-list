@@ -2,9 +2,67 @@
   padding: .5em;
   display: flex;
   align-items: center;
+  height: 50px;
 }
 
 .TodoItem > .title {
   flex-grow: 1;
   padding: 0 .5em;
+}
+
+.TodoItem > .btnDelet {
+  font-size: 2em;
+  visibility: hidden;
+  cursor: pointer;
+  text-align: top;
+  display: block;
+  height: 50px;
+  color: red;
+}
+
+.todoList > li:nth-child(even) > .TodoItem > .btnDelet {
+  color: green;
+}
+
+.todoList > li > .TodoItem > .btnDelet:hover {
+  color: black;
+}
+
+.TodoItem:hover .btnDelet {
+  visibility: visible;
+}
+
+.TodoItem input {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.TodoItem input:checked::after {
+  content: '\2713';
+  color: red;
+  font-size: 2.5em;
+  position: absolute;
+  top: -20px;
+  visibility: visible;
+}
+
+.todoList > li:nth-child(even) > .TodoItem label {
+  border-color: green;
+}
+
+.TodoItem label {
+  border: 1px solid red;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.todoList > li:nth-child(odd) > .TodoItem label:hover {
+  background: rgba(255, 0, 0, .5);
+}
+
+.todoList > li:nth-child(even) > .TodoItem label:hover {
+  background: rgba(0, 255, 0, .5);
 }

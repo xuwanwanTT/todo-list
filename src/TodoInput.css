@@ -1,0 +1,11 @@
+.App > .inputWrapper > .TodoInput {
+  height: 3em;
+  width: 24em;
+  margin: 0 auto;
+  display: block;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0px 2px 5px grey;
+  padding-left: 1em;
+  outline: none;
+}

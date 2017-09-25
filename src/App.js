@@ -41,8 +41,8 @@ class App extends Component {
     
     return (                        //return一段XML，如果是多行需要用小括号括起来
       <div className="App">
-        <h1>{this.state.user.username || "我"}的待办
-          {this.state.user.id ? <button onClick={this.signOut.bind(this)}>登出</button> : null}
+        <h1>{this.state.user.username || "我"}的Todo
+          {this.state.user.id ? <div className="btnOut" onClick={this.signOut.bind(this)}>登出</div> : null}
         </h1>
         <div className="inputWrapper">  
           <TodoInput content={this.state.newTodo}
@@ -64,7 +64,7 @@ class App extends Component {
   signOut(){
     signOut()
     let stateCopy = JSON.parse(JSON.stringify(this.state))
-    stateCopy = {}
+    stateCopy.user = {}
     this.setState(stateCopy)
   }
 

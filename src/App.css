@@ -8,6 +8,27 @@
   min-height: 20em;
   min-width: 32em;
   box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
+  position: relative;
+}
+
+.App > h1 {
+  text-align: center;
+}
+
+.App > h1 > .btnOut{
+  position: absolute;
+  font-size: initial;
+  border: 1px solid #eee;
+  text-align: center;
+  padding: 2px 5px;
+  top: 10px;
+  right: 10px;
+  color: #eee;
+  cursor: pointer;
+}
+
+.App > h1 > .btnOut:hover {
+  color: black;
 }
 
 .App > .todoList {

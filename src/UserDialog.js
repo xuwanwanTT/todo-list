@@ -78,6 +78,7 @@ export default class UserDialog extends Component {
       </div>
     )
   }
+  
   showForgotPassword(){
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.selectedTab = 'forgotPassword'
