@@ -30,6 +30,13 @@ export default class UserDialog extends Component {
         alert('邮箱已存在')
       }
     }
+    if(this.state.formData.username.length < 3){
+      alert('用户名至少为三个字符')
+      return
+    }else if(!this.state.formData.email.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/)){
+      alert('请输入正确的邮箱')
+      return
+    }
     signUp(username, email, password, success, error)
   }
 

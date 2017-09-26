@@ -8,7 +8,7 @@ export default function(props){
           onChange={props.onChange.bind(null,'username')} />
       </div>
       <div className="row">
-        <input type="email" value={props.formData.email} placeholder="你的邮箱"
+        <input type="text" value={props.formData.email} placeholder="你的邮箱"
           onChange={props.onChange.bind(null,'email')} />
       </div>
       <div className="row">
